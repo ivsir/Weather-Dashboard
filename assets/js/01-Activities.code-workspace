@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../../../UCSD-VIRT-FSF-PT-09-2022-U-LOLC/06-Server-Side-APIs/01-Activities"
+		},
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../Work-Day-Scheduler"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Weather-Dashboard"
+	}
+}
