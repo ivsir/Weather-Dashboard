@@ -48,7 +48,9 @@
             </form>
             <!-- //<span class="oi oi-magnifying-glass"></span>\ -->
             <!-- search history-->
-            <ul class="list-group" id="search-history"></ul>
+            <ul class="list-group" id="search-history">
+              <li></li>
+            </ul>
           </div>
 
           <!-- results section -->
@@ -60,28 +62,106 @@
                   <h2
                     class="card-title align-self-center"
                     id="main-city-name"
-                  ></h2>
+                  >San Diego <img id="main-weather-icon" src="" alt="Weather icon"></h2>
                 </div>
-                <h6 class="card-subtitle text-muted" id="main-city-temp">
-                  Temperature:
-                </h6>
-                <h6 class="card-subtitle mt-3 text-muted" id="main-city-wind">
-                  Wind Speed:
-                </h6>
-                <h6 class="card-subtitle mt-3 text-muted" id="main-city-humid">
-                  Humidity:
-                </h6>
+                <h6 class="card-subtitle text-muted" id="main-city-temp">Temperature:</h6>
+                <h6
+                  class="card-subtitle mt-3 text-muted"
+                  id="main-city-wind"
+                >Wind Speed:</h6>
+                <h6
+                  class="card-subtitle mt-3 text-muted"
+                  id="main-city-humid"
+                >Humidity</h6>
               </div>
             </div>
 
             <!-- 5-day forecast -->
             <div>
               <h2 class="card-title mt-3">5-Day Forecast:</h2>
-              <div
-                id="fiveDayCard"
-                class="row justify-content-between"
-                id="five-day"
-              >
+           
+                <section class="container text-dark">
+                  <div
+                  class="row justify-content-between"
+                  id="five-day"
+                >
+                  <div class="col-10 col-md-2 col-lg-2">
+                  <h3>Date</h3>
+                  <h5>
+                    Icon
+                  </h5>
+                  <h6>
+                    Temperature: 
+                  </h6>
+                  <h6>
+                    Wind Speed: 
+                  </h6>
+                  <h6>
+                    Humidity: 
+                  </h6>
+                  </div>
+                <div class="col-10 col-md-2 col-lg-2">
+                      <h3>Date</h3>
+                      <h5>
+                        Icon
+                      </h5>
+                      <h6>
+                        Temperature: 
+                      </h6>
+                      <h6>
+                        Wind Speed: 
+                      </h6>
+                      <h6>
+                        Humidity: 
+                      </h6>
+                </div>
+                <div class="col-10 col-md-2 col-lg-2">
+                      <h3>Date</h3>
+                      <h5>
+                        Icon
+                      </h5>
+                      <h6>
+                        Temperature: 
+                      </h6>
+                      <h6>
+                        Wind Speed: 
+                      </h6>
+                      <h6>
+                        Humidity: 
+                      </h6>
+                </div>
+                <div class="col-10 col-md-2 col-lg-2">
+                      <h3>Date</h3>
+                      <h5>
+                        Icon
+                      </h5>
+                      <h6>
+                        Temperature: 
+                      </h6>
+                      <h6>
+                        Wind Speed: 
+                      </h6>
+                      <h6>
+                        Humidity: 
+                      </h6>
+                </div>
+                <div class="col-10 col-md-2 col-lg-2">
+                      <h3>Date</h3>
+                      <h5>
+                        Icon
+                      </h5>
+                      <h6>
+                        Temperature: 
+                      </h6>
+                      <h6>
+                        Wind Speed: 
+                      </h6>
+                      <h6>
+                        Humidity: 
+                      </h6>
+                </div>
+                </section>
+
                 <!-- filled by displayWeather() -->
               </div>
             </div>
