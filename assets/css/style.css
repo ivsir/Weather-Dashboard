@@ -17,3 +17,15 @@ h5 {
   margin-bottom: 1rem !important;
   width: 20vw;
 }
+
+ul {
+  list-style: none;
+  
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  margin: 5px auto;
+  border-radius: 4px;
+}
