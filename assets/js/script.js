@@ -13,7 +13,7 @@ var apiKey = "e39d6eb5facbd4f8244a672d51ea14b0";
 
 var savedCities = [];
 
-var searchHistory = function (city) {
+var searchHistory = function () {
   var recentCities = JSON.parse(localStorage.getItem("recent-city"));
 
   if (recentCities) {
@@ -51,8 +51,6 @@ var getCityLatLon = function (city) {
         getCurrentWeather(latitude, longitude);
         getWeatherForecast(latitude, longitude);
       });
-    } else {
-      alert("Error:" + response.statusText);
     }
   });
 };
@@ -62,27 +60,17 @@ var getCurrentWeather = function (latitude, longitude) {
   fetch(weatherUrl).then(function (response) {
     if (response.ok) {
       response.json().then(function (data) {
-        console.log(data, "data");
-
         var currentCity = data.name;
         var currentDay = moment().format("  (MM/DD/YYYY)");
-
         var currentIconCode = data.weather[0].icon;
         var iconUrl =
           "https://openweathermap.org/img/w/" + currentIconCode + ".png";
 
-        mainCityNameEl.innerHTML = currentCity + " " + currentDay + " ";
-        currentIconEl.setAttribute("src", iconUrl);
-        mainCityNameEl.appendChild(currentIconEl);
-
         var currentTemp = data.main.temp;
-        currentTempEl.innerHTML = "Temperature: " + currentTemp + "\u00B0F";
 
         var currentWind = data.wind.speed;
-        currentWindEl.innerHTML = "Wind Speed: " + currentWind + " MPH";
 
         var currentHumidity = data.main.humidity;
-        currentHumidityEl.innerHTML = "Humidity: " + currentHumidity + " %";
 
         currentForecastEl.innerHTML = `             
         <div class="card-body">
@@ -91,7 +79,7 @@ var getCurrentWeather = function (latitude, longitude) {
               class="card-title align-self-center"
               id="main-city-name"
             >
-            San Diego <img id="main-weather-icon" src="${iconUrl}" alt="Weather icon">
+            ${currentCity} ${currentDay} <img id="main-weather-icon" src="${iconUrl}" alt="Weather icon">
             </h2>
           </div>
             <h6 
@@ -112,7 +100,9 @@ var getCurrentWeather = function (latitude, longitude) {
             >
               Humidity: ${currentHumidity}%
             </h6>
-      </div>`;
+        </div>
+        `;
+        localStorage.setItem("current-forecast", currentForecastEl);
       });
     } else {
       alert("Error:" + response.statusText);
@@ -125,10 +115,12 @@ var getWeatherForecast = function (latitude, longitude) {
   fetch(weatherUrl).then(function (response) {
     if (response.ok) {
       response.json().then(function (data) {
-        console.log(data);
         weatherForecastEl.textContent = "";
         // temperature for next five days
         for (i = 6; i < data.list.length; i += 8) {
+          var date = moment(data.list[i].dt_txt, "YYYY-MM-DD HH:mm:ss").format(
+            "MM-DD-YYYY"
+          );
           var currentIconCode = data.list[i].weather[0].icon;
           var iconUrl =
             "https://openweathermap.org/img/w/" + currentIconCode + ".png";
@@ -136,8 +128,8 @@ var getWeatherForecast = function (latitude, longitude) {
           var currentWindSpeed = data.list[i].wind.speed;
           var currentHumidity = data.list[i].main.humidity;
 
-          weatherForecastEl.innerHTML += `<div class="col-10 col-md-2 col-lg-2">
-          <h3>${data.list[i].dt_txt}</h3>
+          weatherForecastEl.innerHTML += `<div class="col-10 col-md-2 col-lg-2 card">
+          <h3>${date}</h3>
           <h5>
             <img src = "${iconUrl}">
           </h5>
@@ -153,17 +145,10 @@ var getWeatherForecast = function (latitude, longitude) {
           </div>`;
         }
       });
-    } else {
-      alert("Error:" + response.statusText);
-    }
+    } 
   });
 };
 
-// this is when the button is clicked the info is stored in local storage
-var buttonClickHandler = function (event) {
-  var getCity = event.target.getAttribute("cityName");
-  console.log(getCity);
-};
 
 // form submit handler this is for the input of the city's in the form
 
@@ -184,22 +169,17 @@ var formSubmitHandler = function (event) {
   } else {
     alert("Please enter a city");
   }
-  console.log(city, "city");
   getCityLatLon(city);
 };
 
-// form submit handler this is for the input of the city's in the form
-
-var searchFormEl = document.querySelector("#search-form");
-var cityNameInputEl = document.querySelector("#cityName");
-var searchBtnEl = document.querySelector("#searchBtn");
-
 // this will display the weather
-var displayWeather = function () {};
+var displayWeather = function () {
+  localStorage.getItem("current-forecast");
+};
 
 // this will get the 5day weather cards
 var fiveDayCard = document.querySelector("#fiveDayCard");
-var getFiveWeatherCards = function () {};
+
 
 searchFormEl.addEventListener("submit", formSubmitHandler);
-searchBtnEl.addEventListener("click", buttonClickHandler);
+
