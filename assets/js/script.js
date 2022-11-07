@@ -10,6 +10,7 @@ var savedCities = [];
 
 var searchHistory = function () {
   var recentCities = JSON.parse(localStorage.getItem("recent-city"));
+  
 
   if (recentCities) {
     savedCities = recentCities;
@@ -98,13 +99,14 @@ var getCurrentWeather = function (latitude, longitude) {
         </h6>
         </div>
         `;
-        // localStorage.setItem("current-forecast", currentForecastEl.innerHTML);1
+        // localStorage.setItem("current-forecast", currentForecastEl.innerHTML);
       });
     } else {
       alert("Error:" + response.statusText);
     }
   });
 };
+
 
 var getWeatherForecast = function (latitude, longitude) {
   const weatherUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`;
@@ -124,7 +126,7 @@ var getWeatherForecast = function (latitude, longitude) {
           var currentWindSpeed = data.list[i].wind.speed;
           var currentHumidity = data.list[i].main.humidity;
 
-          weatherForecastEl.innerHTML += `<div class="col-10 col-md-2 col-lg-2 card">
+          weatherForecastEl.innerHTML += `<div class="col-10 col-md-2 col-lg-2 card bg-secondary">
             <h3>${date}</h3>
             <h5>
             <img src = "${iconUrl}">
@@ -139,7 +141,7 @@ var getWeatherForecast = function (latitude, longitude) {
             Humidity: ${currentHumidity}%
             </h6>
             </div>`;
-          localStorage.setItem("weather-forecast", weatherForecastEl.innerHTML);
+          // localStorage.setItem("weather-forecast", weatherForecastEl.innerHTML);
         }
       });
     }
@@ -162,6 +164,7 @@ var formSubmitHandler = function (event) {
 };
 
 // this will display the weather
-var displayWeather = function () {};
+var displayWeather = function () {
+};
 
 searchFormEl.addEventListener("submit", formSubmitHandler);
