@@ -1,9 +1,4 @@
 var currentForecastEl = document.querySelector("#current-forecast-card");
-var mainCityNameEl = document.querySelector("#main-city-name");
-var currentTempEl = document.querySelector("#main-city-temp");
-var currentWindEl = document.querySelector("#main-city-wind");
-var currentHumidityEl = document.querySelector("#main-city-humid");
-var currentIconEl = document.querySelector("#main-weather-icon");
 var weatherForecastEl = document.querySelector("#five-day");
 var searchHistoryEl = document.querySelector("#search-history");
 
@@ -47,10 +42,11 @@ var getCityLatLon = function (city) {
         displayWeather(data, city);
         longitude = data[0].lon;
         latitude = data[0].lat;
-        console.log(data, "data");
         getCurrentWeather(latitude, longitude);
         getWeatherForecast(latitude, longitude);
       });
+    } else {
+      alert("Error:" + response.statusText);
     }
   });
 };
@@ -74,35 +70,35 @@ var getCurrentWeather = function (latitude, longitude) {
 
         currentForecastEl.innerHTML = `             
         <div class="card-body">
-          <div class="d-flex flex-row">
-            <h2
-              class="card-title align-self-center"
-              id="main-city-name"
-            >
-            ${currentCity} ${currentDay} <img id="main-weather-icon" src="${iconUrl}" alt="Weather icon">
-            </h2>
-          </div>
-            <h6 
-              class="card-subtitle text-muted" 
-              id="main-city-temp"
-            >
-              Temperature: ${currentTemp}\u00B0F
-            </h6>
-            <h6
-              class="card-subtitle mt-3 text-muted"
-              id="main-city-wind"
-            >
-              Wind Speed: ${currentWind} MPH
-            </h6>
-            <h6
-              class="card-subtitle mt-3 text-muted"
-              id="main-city-humid"
-            >
-              Humidity: ${currentHumidity}%
-            </h6>
+        <div class="d-flex flex-row">
+        <h2
+        class="card-title align-self-center"
+        id="main-city-name"
+        >
+        ${currentCity} ${currentDay} <img id="main-weather-icon" src="${iconUrl}" alt="Weather icon">
+        </h2>
+        </div>
+        <h6 
+        class="card-subtitle text-muted" 
+        id="main-city-temp"
+        >
+        Temperature: ${currentTemp}\u00B0F
+        </h6>
+        <h6
+        class="card-subtitle mt-3 text-muted"
+        id="main-city-wind"
+        >
+        Wind Speed: ${currentWind} MPH
+        </h6>
+        <h6
+        class="card-subtitle mt-3 text-muted"
+        id="main-city-humid"
+        >
+        Humidity: ${currentHumidity}%
+        </h6>
         </div>
         `;
-        localStorage.setItem("current-forecast", currentForecastEl);
+        // localStorage.setItem("current-forecast", currentForecastEl.innerHTML);1
       });
     } else {
       alert("Error:" + response.statusText);
@@ -129,43 +125,36 @@ var getWeatherForecast = function (latitude, longitude) {
           var currentHumidity = data.list[i].main.humidity;
 
           weatherForecastEl.innerHTML += `<div class="col-10 col-md-2 col-lg-2 card">
-          <h3>${date}</h3>
-          <h5>
+            <h3>${date}</h3>
+            <h5>
             <img src = "${iconUrl}">
-          </h5>
-          <h6>
+            </h5>
+            <h6>
             Temperature: ${currentTemp}\u00B0F
-          </h6>
-          <h6>
+            </h6>
+            <h6>
             Wind Speed: ${currentWindSpeed} MPH
-          </h6>
-          <h6>
+            </h6>
+            <h6>
             Humidity: ${currentHumidity}%
-          </h6>
-          </div>`;
+            </h6>
+            </div>`;
+          localStorage.setItem("weather-forecast", weatherForecastEl.innerHTML);
         }
       });
-    } 
+    }
   });
 };
 
-
-// form submit handler this is for the input of the city's in the form
-
 var searchFormEl = document.querySelector("#search-form");
 var cityNameInputEl = document.querySelector("#cityName");
-var searchBtnEl = document.querySelector("#searchBtn");
 
 var formSubmitHandler = function (event) {
   event.preventDefault();
-  // let inputVal = input.value;
   var city = cityNameInputEl.value.trim();
 
   if (city) {
     getCityLatLon(city);
-    mainCityNameEl.textContent = "";
-
-    cityNameInputEl.value = "";
   } else {
     alert("Please enter a city");
   }
@@ -173,13 +162,6 @@ var formSubmitHandler = function (event) {
 };
 
 // this will display the weather
-var displayWeather = function () {
-  localStorage.getItem("current-forecast");
-};
-
-// this will get the 5day weather cards
-var fiveDayCard = document.querySelector("#fiveDayCard");
-
+var displayWeather = function () {};
 
 searchFormEl.addEventListener("submit", formSubmitHandler);
-

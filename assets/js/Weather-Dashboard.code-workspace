@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../Power-Quiz"
+		},
+		{
+			"path": "../../../UCSD-VIRT-FSF-PT-09-2022-U-LOLC/04-Web-APIs"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Weather-Dashboard"
+	}
+}
