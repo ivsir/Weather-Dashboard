@@ -31,7 +31,7 @@ var searchHistory = function () {
 searchHistory();
 
 var getCityLatLon = function (city) {
-  var url = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&units=imperial&appid=${apiKey}`;
+  var url = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&units=imperial&appid=${apiKey}`;
   if (savedCities.includes(city) === false) {
     savedCities.push(city);
     localStorage.setItem("recent-city", JSON.stringify(savedCities));
@@ -111,7 +111,7 @@ var getCurrentWeather = function (latitude, longitude) {
 
 
 var getWeatherForecast = function (latitude, longitude) {
-  const weatherUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`;
+  const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`;
   fetch(weatherUrl).then(function (response) {
     if (response.ok) {
       response.json().then(function (data) {
