@@ -69,7 +69,8 @@ var getCurrentWeather = function (latitude, longitude) {
 
         var currentHumidity = data.main.humidity;
 
-        currentForecastEl.innerHTML = `             
+        currentForecastEl.innerHTML = `
+        <div class="card mt-2 card-main-div" >             
         <div class="card-body">
         <div class="d-flex flex-row">
         <h2
@@ -97,6 +98,7 @@ var getCurrentWeather = function (latitude, longitude) {
         >
         Humidity: ${currentHumidity}%
         </h6>
+        </div>
         </div>
         `;
         // localStorage.setItem("current-forecast", currentForecastEl.innerHTML);
